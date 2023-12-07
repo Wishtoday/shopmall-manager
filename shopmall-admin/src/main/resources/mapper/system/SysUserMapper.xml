@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopmall.modules.system.mapper.SysUserMapper">
+    <resultMap id="BaseResultMap" type="com.shopmall.modules.system.domain.User">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="avatarId" jdbcType="BIGINT" property="avatarId"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="enabled" jdbcType="BIGINT" property="enabled"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="dept_id" jdbcType="BIGINT" property="deptId"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="job_id" jdbcType="BIGINT" property="jobId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_password_reset_time" jdbcType="TIMESTAMP" property="lastPasswordResetTime"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_del" jdbcType="TINYINT" property="is_del"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,AVATARID,EMAIL,ENABLED,USERNAME,PASSWORD,DEPT_ID,PHONE,JOB_ID,CREATE_TIME.LAST_PASSWORD_RESET_TIME,
+        NICK_NAME,SEX,UPDATE_TIME,IS_DEL
+    </sql>
+
+
+</mapper>

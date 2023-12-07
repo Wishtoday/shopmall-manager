@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopmall.modules.system.mapper.UserAvatarMapper">
+    <resultMap id="BaseResultMap" type="com.shopmall.modules.system.domain.UserAvatar">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="size" jdbcType="VARCHAR" property="size"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,REAL_NAME,PATH,SIZE,CREATE_TIME
+    </sql>
+
+
+</mapper>

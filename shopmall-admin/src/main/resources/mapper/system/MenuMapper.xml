@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopmall.modules.system.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.shopmall.modules.system.domain.Menu">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="i_Frame" jdbcType="BIT" property="iFrame"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="component" jdbcType="BIGINT" property="component"/>
+        <result column="pid" jdbcType="BIGINT" property="pid"/>
+        <result column="sort" jdbcType="BIGINT" property="sort"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="cache" jdbcType="BIT" property="cache"/>
+        <result column="hidden" jdbcType="BIT" property="hidden"/>
+        <result column="component_Name" jdbcType="VARCHAR" property="componentName"/>
+        <result column="permission" jdbcType="VARCHAR" property="permission"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_del" jdbcType="INTEGER" property="isDel"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,I_FRAME,NAME,COMPONENT,PID,SORT,ICON,PATH,CACHE,HIDDEN,TYPE,CREATE_TIME,
+        UPDATE_TIME, IS_DEL
+    </sql>
+
+    <select id="findByPid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+            M.ID,
+            M.I_FRAME,
+            M.NAME,
+            M.COMPONENT,
+            M.PID,
+            M.SORT,
+            M.ICON,
+            M.PATH,
+            M.CACHE,
+            M.HIDDEN,
+            M.COMPONENT_NAME,
+            M.TYPE,
+            M.CREATE_TIME,
+            M.UPDATE_TIME,
+            M.IS_DEL
+        FROM MENU WHERE M.PID = #{pid}
+        AND M.IS_DEL = 0
+    </select>
+
+    <select id="findMenuByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        M.ID,
+        M.I_FRAME,
+        M.NAME,
+        M.COMPONENT,
+        M.PID,
+        M.SORT,
+        M.ICON,
+        M.PATH,
+        M.CACHE,
+        M.HIDDEN,
+        M.COMPONENT_NAME,
+        M.TYPE,
+        M.CREATE_TIME,
+        M.UPDATE_TIME,
+        M.IS_DEL
+        FROM MENU M
+        LEFT JOIN ROLES_MENUS T ON M.ID = T.MENU_ID
+        LEFT JOIN ROLE R ON R.ID = T.ROLE_ID
+        WHERE
+        M.IS_DEL = 0
+        <if test="roleId != null">
+            AND R.ID = #{roleId}
+        </if>
+    </select>
+
+    <select id="selectListByRoles" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        M.ID,
+        M.I_FRAME,
+        M. NAME,
+        M.COMPONENT,
+        M.PID,
+        M.SORT,
+        M.ICON,
+        M.PATH,
+        M. CACHE,
+        M.HIDDEN,
+        M.COMPONENT_NAME,
+        M.TYPE,
+        M.CREATE_TIME,
+        M.UPDATE_TIME,
+        M.IS_DEL
+        FROM MENU M
+        LEFT OUTER JOIN ROLES_MENUS T ON M.ID= T.MENU_ID
+        LEFT OUTER JOIN ROLE R ON R.ID = T.ROLE_ID
+        WHERE M.IS_DEL = 0
+        AND M.TYPE != 2
+        AND R.ID IN
+        <foreach collection="roleIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY M.SORT ASC
+    </select>
+
+</mapper>
