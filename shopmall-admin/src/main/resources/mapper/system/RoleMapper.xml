@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopmall.modules.system.mapper.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.shopmall.modules.system.domain.Role">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="data_scope" jdbcType="VARCHAR" property="dataScope"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="permission" jdbcType="VARCHAR" property="permission"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <!-- 是否删除 0未删除 1删除 -->
+        <result column="is_del" jdbcType="TINYINT" property="isDel"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,NAME,REMARK,DATA_SCOPE,LEVEL,PERMISSION,CREATE_TIME,UPDATE_TIME,IS_DEL
+    </sql>
+
+    <select id="findByUsersId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+            R.ID,
+            R.CREATE_TIME,
+            R.DATA_SCOPE,
+            R.LEVEL,
+            R.NAME,
+            R.PERMISSION,
+            R.REMARK
+        FROM ROLE R
+        LEFT OUTER JOIN USERS_ROLES UR ON R.ID = UR.ROLE_ID
+        LEFT OUTER JOIN USER U ON UR.USER_ID = U.ID
+        WHERE U.ID = #{id}
+    </select>
+
+    <select id="selectListByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+            R.ID,
+            R.CREATE_TIME,
+            R.DATA_SCOPE,
+            R.LEVEL,
+            R.NAME,
+            R.PERMISSION,
+            R.REMARK
+        FROM ROLE R
+        LEFT JOIN USERS_ROLES T ON R.ID= T.ROLE_ID
+        LEFT JOIN USER U ON U.ID = T.USER_ID
+        WHERE U.ID = #{id}
+    </select>
+</mapper>

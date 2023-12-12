@@ -16,7 +16,8 @@
         <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
         <result column="sex" jdbcType="VARCHAR" property="sex"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="is_del" jdbcType="TINYINT" property="is_del"/>
+        <!-- 是否删除 0未删除 1删除 -->
+        <result column="is_del" jdbcType="TINYINT" property="isDel"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -24,5 +25,30 @@
         NICK_NAME,SEX,UPDATE_TIME,IS_DEL
     </sql>
 
+    <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+            u.id,
+            u.nick_name,
+            u.sex,
+            u.dept_id,
+            u.enabled,
+            u.create_time,
+            u.phone,
+            u.email,
+            u.job_id,
+            u.password,
+            u.username,
+            ua.real_name avatar
+        FROM user u
+        LEFT JOIN user_avatar ua ON u.avatar_id = ua.id
+        WHERE u.username = #{username}
+    </select>
 
+    <!--  修改密码  -->
+    <update id="updatePassword">
+        UPDATE USER
+        SET PASSWORD = #{password},
+            LAST_PASSWORD_RESET_TIME = #{lastPasswordResetTime}
+        WHERE USERNAME = #{username}
+    </update>
 </mapper>

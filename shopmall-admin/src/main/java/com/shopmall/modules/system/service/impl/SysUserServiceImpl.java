@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.github.pagehelper.PageInfo;
 import com.shopmall.exception.EntityExistException;
 import com.shopmall.modules.system.domain.Role;
+import com.shopmall.modules.system.domain.UserAvatar;
 import com.shopmall.modules.system.domain.UsersRoles;
 import com.shopmall.pagehandle.common.service.impl.BaseServiceImpl;
 import com.shopmall.pagehandle.utils.QueryHelpPlus;
@@ -16,8 +17,8 @@ import com.shopmall.modules.system.dto.UserQueryCriteria;
 import com.shopmall.modules.system.mapper.RoleMapper;
 import com.shopmall.modules.system.mapper.SysUserMapper;
 import com.shopmall.modules.system.service.*;
-import com.shopmall.utils.RedisUtils;
-import com.shopmall.utils.ValidationUtil;
+import com.shopmall.utils.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -48,25 +49,22 @@ public class SysUserServiceImpl extends BaseServiceImpl <SysUserMapper, User> im
     @Value("${file.avatar}")
     private String avatar;
 
-    private final IGenerator generator;
-    private final SysUserMapper userMapper;
-    private final UserAvatarService userAvatarService;
-    private final JobService jobService;
-    private final DeptService deptService;
-    private final RoleMapper roleMapper;
-    private final RedisUtils redisUtils;
-    private final UsersRolesService usersRolesService;
-
-    public SysUserServiceImpl(IGenerator generator, SysUserMapper userMapper, UserAvatarService userAvatarService, JobService jobService, DeptService deptService, RoleMapper roleMapper, RedisUtils redisUtils, UsersRolesService usersRolesService) {
-        this.generator = generator;
-        this.userMapper = userMapper;
-        this.userAvatarService = userAvatarService;
-        this.jobService = jobService;
-        this.deptService = deptService;
-        this.roleMapper = roleMapper;
-        this.redisUtils = redisUtils;
-        this.usersRolesService = usersRolesService;
-    }
+    @Autowired
+    private IGenerator generator;
+    @Autowired
+    private SysUserMapper userMapper;
+    @Autowired
+    private UserAvatarService userAvatarService;
+    @Autowired
+    private JobService jobService;
+    @Autowired
+    private DeptService deptService;
+    @Autowired
+    private RoleMapper roleMapper;
+    @Autowired
+    private RedisUtils redisUtils;
+    @Autowired
+    private UsersRolesService usersRolesService;
 
     @Override
     //@Cacheable
@@ -87,7 +85,7 @@ public class SysUserServiceImpl extends BaseServiceImpl <SysUserMapper, User> im
         for (User user : userList) {
             user.setJob(jobService.getById(user.getJobId()));
             user.setDept(deptService.getById(user.getDeptId()));
-            user.setRoles(roleMapper.findByUsers_Id(user.getId()));
+            user.setRoles(roleMapper.findByUsersId(user.getId()));
         }
        return userList;
     }
@@ -114,7 +112,7 @@ public class SysUserServiceImpl extends BaseServiceImpl <SysUserMapper, User> im
     }
 
     /**
-     * 根据用户名查询
+     * 根据用户名查询用户信息
      *
      * @param userName /
      * @return /
@@ -141,7 +139,7 @@ public class SysUserServiceImpl extends BaseServiceImpl <SysUserMapper, User> im
      */
     @Override
     public void updatePass(String username, String encryptPassword) {
-        userMapper.updatePass(encryptPassword, DateUtil.format(new Date(),"yyyy-MM-dd HH:mm:ss"),username);
+        userMapper.updatePassword(encryptPassword, DateUtil.format(new Date(),"yyyy-MM-dd HH:mm:ss"),username);
     }
 
     /**
@@ -151,8 +149,8 @@ public class SysUserServiceImpl extends BaseServiceImpl <SysUserMapper, User> im
      */
     @Override
     public void updateAvatar(MultipartFile multipartFile) {
-       /* User user = this.getOne(new LambdaQueryWrapper <User>()
-                .eq(User::getUsername,SecurityUtils.getUsername()));
+        User user = this.getOne(new LambdaQueryWrapper <User>()
+                .eq(User::getUsername, SecurityUtils.getUsername()));
         UserAvatar userAvatar =  userAvatarService.getOne(new LambdaQueryWrapper <UserAvatar>()
                 .eq(UserAvatar::getId,user.getAvatarId()));
         String oldPath = "";
@@ -171,7 +169,7 @@ public class SysUserServiceImpl extends BaseServiceImpl <SysUserMapper, User> im
         this.saveOrUpdate(user);
         if(StringUtils.isNotBlank(oldPath)){
             FileUtil.del(oldPath);
-        }*/
+        }
 
     }
 

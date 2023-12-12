@@ -40,6 +40,7 @@
         <validator.version>6.1.7.Final</validator.version>
         <whvcse.version>1.6.2</whvcse.version>
         <bitwalker.version>1.21</bitwalker.version>
+        <poi.version>4.1.2</poi.version>
     </properties>
 
     <dependencies>
@@ -116,6 +117,11 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
         </dependency>
         <!-- fastjson -->
         <dependency>

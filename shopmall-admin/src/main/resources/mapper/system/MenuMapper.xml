@@ -17,6 +17,7 @@
         <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <!-- 是否删除 0未删除 1删除 -->
         <result column="is_del" jdbcType="INTEGER" property="isDel"/>
     </resultMap>
 
@@ -74,7 +75,7 @@
     </select>
 
     <select id="selectListByRoles" parameterType="java.util.List" resultMap="BaseResultMap">
-        select
+        SELECT
         M.ID,
         M.I_FRAME,
         M. NAME,

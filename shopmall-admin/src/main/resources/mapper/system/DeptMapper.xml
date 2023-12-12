@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopmall.modules.system.mapper.DeptMapper">
+    <resultMap id="BaseResultMap" type="com.shopmall.modules.system.domain.Dept">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="pid" jdbcType="BIGINT" property="pid"/>
+        <result column="enabled" jdbcType="BIT" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <!-- 是否删除 0未删除 1删除 -->
+        <result column="is_del" jdbcType="TINYINT" property="isDel"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,NAME,PID,ENABLED,CREATE_TIME,UPDATE_TIME,IS_DEL
+    </sql>
+
+    <select id="findDeptByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+            M.ID,
+            M.NAME,
+            M.PID,
+            M.ENABLED,
+            M.CREATE_TIME,
+            M.UPDATE_TIME,
+            M.IS_DEL
+        FROM DEPT M
+        LEFT JOIN ROLES_DEPTS T ON M.ID= T.DEPT_ID
+        LEFT JOIN ROLE R ON R.ID = T.ROLE_ID
+        WHERE R.ID = ${roleId}
+    </select>
+</mapper>

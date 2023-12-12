@@ -32,6 +32,11 @@ public class BaseDomain implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateTime;
 
+
+    /**
+     * 是否删除 0未删除 1删除
+     *
+     **/
     @TableLogic
     @JsonIgnore
     @TableField(fill= FieldFill.INSERT)

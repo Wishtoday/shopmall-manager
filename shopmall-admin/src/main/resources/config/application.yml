@@ -55,7 +55,7 @@ shopmall:
 
 logging:
   level:
-    com.shopmall: DEBUG
+    com.shopmall: TRACE
     org.springframework.web: DEBUG
     com.github.binarywang.demo.wx.mp: DEBUG
     me.chanjar.weixin: DEBUG

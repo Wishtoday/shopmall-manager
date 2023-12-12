@@ -231,7 +231,7 @@ public class RoleServiceImpl extends BaseServiceImpl <RoleMapper, Role> implemen
     @Override
 //    @Cacheable(key = "'loadPermissionByUser:' + #p0.username")
     public Collection<SimpleGrantedAuthority> mapToGrantedAuthorities(UserDto user) {
-        Set<Role> roles = roleMapper.findByUsers_Id(user.getId());
+        Set<Role> roles = roleMapper.findByUsersId(user.getId());
         for (Role role : roles) {
             Set<Menu> menuSet = menuMapper.findMenuByRoleId(role.getId());
             role.setMenus(menuSet);
