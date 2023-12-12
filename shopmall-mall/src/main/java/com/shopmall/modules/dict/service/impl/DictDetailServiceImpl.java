@@ -29,9 +29,11 @@ import java.util.stream.Collectors;
 //import org.springframework.cache.annotation.Cacheable;
 
 /**
-* @author hupeng
-* @date 2020-05-14
-*/
+ * @description:
+ * @author: zhuxiying
+ * @date: 2023/12/12 18:00
+ **/
+
 @Service
 @AllArgsConstructor
 //@CacheConfig(cacheNames = "dictDetail")

@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.shopmall.dozer.config.DozerMapperConfig
+    com.shopmall.dozer.config.DozerMapperConfig,\
+    com.shopmall.oss.config.OssAutoConfiguration

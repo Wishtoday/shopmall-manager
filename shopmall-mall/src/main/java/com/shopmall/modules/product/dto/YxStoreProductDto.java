@@ -8,9 +8,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
-* @author hupeng
-* @date 2020-05-12
-*/
+ * @description:
+ * @author: zhuxiying
+ * @date: 2023/12/12 18:00
+ **/
 @Data
 public class YxStoreProductDto implements Serializable {
 

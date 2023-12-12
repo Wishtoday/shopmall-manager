@@ -1,6 +1,7 @@
 package com.shopmall.modules.aop;
 
 
+import com.shopmall.exception.ShopMallException;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -29,7 +30,7 @@ public class ForbidSubmitAspect {
     public Object around(ProceedingJoinPoint pjp, ForbidSubmit forbidSubmit) throws Throwable {
 
         //用于拦截演示环境一些禁止操作
-        //throw new YshopException("演示环境禁止操作");
+//        throw new ShopMallException("演示环境禁止操作");
         return pjp.proceed();
 
 

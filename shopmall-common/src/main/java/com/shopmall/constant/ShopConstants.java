@@ -39,5 +39,10 @@ public interface ShopConstants {
 	 * redis首页键
 	 */
 	String SHOP_REDIS_INDEX_KEY = "shop:index_data";
+	/**
+	 *后台api地址
+	 *
+	 */
+	String ADMIN_API_URL="admin_api_url";
 
 }

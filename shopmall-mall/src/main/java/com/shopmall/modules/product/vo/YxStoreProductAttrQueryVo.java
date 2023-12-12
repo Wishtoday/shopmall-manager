@@ -13,8 +13,8 @@ import java.util.List;
  * 商品属性表 查询结果对象
  * </p>
  *
- * @author hupeng
- * @date 2019-10-23
+ * @author zhuxiying
+ * @date 2023-12-12
  */
 @Data
 @ApiModel(value = "YxStoreProductAttrQueryVo对象", description = "商品属性表查询参数")
