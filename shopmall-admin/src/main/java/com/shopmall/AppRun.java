@@ -29,7 +29,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @SpringBootApplication(exclude = {WxMaAutoConfiguration.class})
 @EnableTransactionManagement
-@MapperScan(basePackages ={"com.shopmall.modules.*.mapper", "com.shopmall.config"})
+@MapperScan(basePackages ={"com.shopmall.mapper",
+                           "com.shopmall.*.mapper",
+                           "com.shopmall.modules.*.mapper",
+                           "com.shopmall.config"})
 public class AppRun {
 
     public static void main(String[] args) {

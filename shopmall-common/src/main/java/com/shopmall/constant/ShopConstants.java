@@ -35,5 +35,9 @@ public interface ShopConstants {
 	String QQ_MAP_URL = "https://apis.map.qq.com/ws/geocoder/v1/";
 
 	String APP_LOGIN_USER = "app-online-token:";
+	/**
+	 * redis首页键
+	 */
+	String SHOP_REDIS_INDEX_KEY = "shop:index_data";
 
 }

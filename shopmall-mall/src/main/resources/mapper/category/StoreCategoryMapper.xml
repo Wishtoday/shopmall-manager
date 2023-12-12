@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopmall.modules.category.mapper.StoreCategoryMapper">
+    <resultMap id="BaseResultMap" type="com.shopmall.modules.category.domain.YxStoreCategory">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pid" jdbcType="INTEGER" property="pid"/>
+        <result column="cate_name" jdbcType="VARCHAR" property="cateName"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="pic" jdbcType="VARCHAR" property="pic"/>
+        <result column="is_show" jdbcType="TINYINT" property="isShow"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <!-- 是否删除 0未删除 1删除 -->
+        <result column="is_del" jdbcType="TINYINT" property="isDel"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,PID,CATE_NAME,SORT,PIC,IS_SHOW,CREATE_TIME,UPDATE_TIME,IS_DEL
+    </sql>
+
+
+</mapper>

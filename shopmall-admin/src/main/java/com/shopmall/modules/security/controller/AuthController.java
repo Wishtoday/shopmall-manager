@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
 import com.shopmall.exception.RequestException;
+import com.shopmall.logging.aop.Log;
 import com.shopmall.modules.security.config.SecurityProperties;
 import com.shopmall.modules.security.TokenUtil;
 import com.shopmall.modules.security.service.OnlineUserService;
@@ -17,6 +18,7 @@ import com.wf.captcha.ArithmeticCaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,23 +54,21 @@ public class AuthController {
     private String privateKey;
     @Value("${single.login}")
     private Boolean singleLogin;
-    private final SecurityProperties properties;
-    private final RedisUtils redisUtils;
-    private final UserDetailsService userDetailsService;
-    private final OnlineUserService onlineUserService;
-    private final TokenUtil tokenUtil;
-    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    @Autowired
+    private SecurityProperties properties;
+    @Autowired
+    private RedisUtils redisUtils;
+    @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private OnlineUserService onlineUserService;
+    @Autowired
+    private TokenUtil tokenUtil;
+    @Autowired
+    private AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public AuthController(SecurityProperties properties, RedisUtils redisUtils, UserDetailsService userDetailsService, OnlineUserService onlineUserService, TokenUtil tokenUtil, AuthenticationManagerBuilder authenticationManagerBuilder) {
-        this.properties = properties;
-        this.redisUtils = redisUtils;
-        this.userDetailsService = userDetailsService;
-        this.onlineUserService = onlineUserService;
-        this.tokenUtil = tokenUtil;
-        this.authenticationManagerBuilder = authenticationManagerBuilder;
-    }
 
-//    @Log("用户登录")
+    @Log("用户登录")
     @ApiOperation("登录授权")
     @AnonymousAccess
     @PostMapping(value = "/login")

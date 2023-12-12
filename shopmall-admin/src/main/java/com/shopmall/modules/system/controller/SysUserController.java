@@ -46,7 +46,7 @@ import java.util.stream.Collectors;
  * @date: 2023/12/12 9:28
  **/
 
-@Api(tags = "系统：用户管理")
+@Api(tags = "系统管理：用户管理")
 @RestController
 @RequestMapping("/api/users")
 public class SysUserController {

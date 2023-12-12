@@ -10,6 +10,26 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>shopmall-shop</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.shopmall</groupId>
+            <artifactId>shopmall-common</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.shopmall</groupId>
+            <artifactId>shopmall-mall</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.shopmall</groupId>
+            <artifactId>shopmall-mall</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>
